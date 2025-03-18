@@ -1,17 +1,25 @@
 #include <Arduino.h>
 #define LED 13
 
-void setup() {
-  pinMode(LED, OUTPUT);
+bool state = false;
+int contador=0;
+
+int antes = millis();
+
+void setup()
+{
   Serial.begin(9600);
-  // put your setup code here, to run once:
+  pinMode(LED, OUTPUT);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(LED,HIGH);
-  delay(100);
-  digitalWrite(LED,LOW);
-  delay(1000);
-  Serial.print("funciona.");
-}          
+void loop()
+{
+  int ahora = millis();
+  if (ahora - antes > 1000) {
+    state = !state;
+    digitalWrite(LED, state);
+    Serial.println("Cambio de estado");
+    antes = ahora;
+  }
+  Serial.println(contador++);
+}
