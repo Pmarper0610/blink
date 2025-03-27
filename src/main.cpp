@@ -14,7 +14,7 @@ void setup()
 void loop()
 {
   int ahora = millis();
-  if (ahora - antes > 1000) {
+  if (ahora - antes > 200) {
     state = !state;
     digitalWrite(LED_BUILTIN, state);
     Serial.println("Cambio de estado");
